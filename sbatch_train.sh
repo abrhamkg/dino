@@ -1,3 +1,5 @@
+#! /bin/bash
+
 #SBATCH --export=ALL
 #SBATCH --cpus-per-task=24
 #SBATCH --gres=gpu:1
