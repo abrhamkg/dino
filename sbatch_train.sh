@@ -1,6 +1,8 @@
+#SBATCH --export=ALL
+#SBATCH --cpus-per-task=24
+#SBATCH --gres=gpu:1
+#SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --mem=32GB
-#SBATCH --time=00:10:00
 #SBATCH --job-name=dino_s_info_drop_subset
 #SBATCH --output=slurm_logs/dino_s_info_drop_subset.out
 #SBATCH --error=slurm_logs/dino_s_info_drop_subset.err
