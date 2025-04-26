@@ -20,6 +20,8 @@ import math
 import json
 from pathlib import Path
 
+from tqdm import tqdm
+
 import numpy as np
 from PIL import Image
 import torch
@@ -217,7 +219,7 @@ def train_dino(args):
 def train_one_epoch(student, teacher, teacher_without_ddp, dino_loss, data_loader, optimizer, lr_schedule, wd_schedule, momentum_schedule, epoch, fp16_scaler, args):
     metric_logger = dino_utils.MetricLogger(delimiter="  ")
 
-    for it, (images, _) in enumerate(data_loader):
+    for it, (images, _) in tqdm(enumerate(data_loader), total=len(data_loader)):
         # print(it)
         # if it < 200:
         #     continue
