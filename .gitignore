@@ -1,0 +1,21 @@
+# File extensions
+*.pt
+*.pth
+*.ckpt
+*.tar
+*.npz
+*.out
+*.jpeg
+*.png
+*.mp4
+
+# Directories
+**/__pycache__/
+outputs/
+labeled_s_examples/
+ecoset_examples/
+video_atts/
+.venv/
+.vscode/
+.idea/
+
