@@ -35,6 +35,9 @@ import vision_mlps as vimlps
 import vision_transformer as vits
 from vision_transformer import DINOHead
 
+from infodrop_resnext import resnext50_32x4d, load_dino_mugs
+from huggingface_hub import hf_hub_download
+
 torchvision_archs = sorted(name for name in torchvision_models.__dict__
     if name.islower() and not name.startswith("__")
     and callable(torchvision_models.__dict__[name]))
@@ -122,9 +125,17 @@ def train_dino(args):
         embed_dim = student.embed_dim
     # otherwise, we check if the architecture is in torchvision models
     elif args.arch in torchvision_models.__dict__.keys():
-        student = torchvision_models.__dict__[args.arch]()
-        teacher = torchvision_models.__dict__[args.arch]()
+        student = resnext50_32x4d(pretrained=False)
+        model_name = "dino_sfp_resnext50"
+        checkpoint = hf_hub_download(repo_id="eminorhan/"+model_name, filename=model_name+".pth")
+        load_dino_mugs(student, checkpoint, "student")
+
+        teacher = resnext50_32x4d(pretrained=False)
+        checkpoint = hf_hub_download(repo_id="eminorhan/"+model_name, filename=model_name+".pth")
+        load_dino_mugs(teacher, checkpoint, "teacher")
+
         embed_dim = student.fc.weight.shape[1]
+
         print('Embedding dimension of student & teacher nets', embed_dim)
     elif args.arch in vimlps.__dict__.keys():
         student = vimlps.__dict__[args.arch]()
