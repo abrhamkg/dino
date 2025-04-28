@@ -19,18 +19,17 @@
 # module load cuda/12.4
 # conda activate myenv
 
-# ---- Launch training with torchrun ----
-torchrun \
-    --standalone \                  # single-node rendez-vous
-    --nproc_per_node=4 \            # one process per GPU
-    train_dino.py \
-        --arch resnext50_32x4d \
-        --patch_size 14 \
-        --num_workers 32 \          # 4 GPUs × 8 workers each
-        --lr 0.0001 \
-        --min_lr 0.0001 \
-        --optimizer adamw \
-        --output_dir . \
-        --data_path /l/users/abrham.gebreselasie/datasets/expt_saycam/imfldr_train_5fps/ \
-        --save_prefix dino_s_info_drop_subset \
-        --batch_size_per_gpu 64     # total batch = 4 × 64 = 256
+python train_dino_nowds_lightning.py \
+    --arch resnext50_32x4d \
+    --patch_size 14 \
+    --num_workers 32 \
+    --lr 0.0001 \
+    --min_lr 0.0001 \
+    --optimizer adamw \
+    --output_dir . \
+    --data_path /l/users/abrham.gebreselasie/datasets/expt_saycam/imfldr_train_5fps/ \
+    --save_prefix dino_s_info_drop_subset \
+    --batch_size 256 \
+    --accelerator gpu \
+    --devices 4 \
+    --precision 32-true
