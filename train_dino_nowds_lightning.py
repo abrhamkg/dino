@@ -515,7 +515,6 @@ def main():
         entity=args.wandb_entity,
         resume=True,
         id="ynl748lc",
-        verbose=True,
     )
     
     # Add Weights & Biases callback to monitor system metrics
