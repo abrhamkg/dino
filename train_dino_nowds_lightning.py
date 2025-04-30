@@ -513,6 +513,9 @@ def main():
         tags=["dino", args.arch],
         config=vars(args),
         entity=args.wandb_entity,
+        resume=True,
+        id="ynl748lc",
+        verbose=True,
     )
     
     # Add Weights & Biases callback to monitor system metrics
