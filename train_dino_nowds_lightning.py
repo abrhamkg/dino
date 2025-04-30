@@ -557,12 +557,12 @@ def main():
         logger=logger,
         log_every_n_steps=10,
         # Use ckpt_path for PyTorch Lightning 2.4.0+
-        ckpt_path=checkpoint_path,
     )
     
     # Train model
     start_time = time.time()
-    trainer.fit(model, data_module)
+    trainer.fit(model, data_module, ckpt_path=checkpoint_path,
+)
     
     # Print training time
     total_time = time.time() - start_time
