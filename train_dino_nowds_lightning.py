@@ -526,10 +526,10 @@ def main():
         callbacks = [checkpoint_callback, lr_monitor]
     
     # Check for existing checkpoint
-    # checkpoint_path = None
+    checkpoint_path = "/workspace/last.ckpt"
+    print(f"Resuming from checkpoint: {checkpoint_path}")
     # last_checkpoint_path = os.path.join(args.output_dir, "last.ckpt")
     # if os.path.exists(last_checkpoint_path):
-    #     print(f"Resuming from checkpoint: {last_checkpoint_path}")
     #     checkpoint_path = last_checkpoint_path
     # else:
     #     # Check if there's a checkpoint from the old format to convert
@@ -557,7 +557,7 @@ def main():
         logger=logger,
         log_every_n_steps=10,
         # Use ckpt_path for PyTorch Lightning 2.4.0+
-        # ckpt_path=checkpoint_path,
+        ckpt_path=checkpoint_path,
     )
     
     # Train model
